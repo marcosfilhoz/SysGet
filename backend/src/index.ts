@@ -21,6 +21,20 @@ const corsOptions: cors.CorsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json({ limit: "1mb" }));
 
+app.get("/", (_req, res) => {
+  return res.json({
+    name: "SysGet API",
+    ok: true,
+    endpoints: {
+      health: "/health",
+      dashboard: "/dashboard",
+      responsibles: "/responsibles",
+      expenses: "/expenses",
+      expenseStatus: "/expenses/:id/status",
+    },
+  });
+});
+
 app.get("/health", (_req, res) => res.json({ ok: true }));
 
 app.use("/responsibles", responsiblesRouter);
